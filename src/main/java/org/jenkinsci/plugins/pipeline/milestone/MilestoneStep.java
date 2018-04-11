@@ -26,6 +26,7 @@ package org.jenkinsci.plugins.pipeline.milestone;
 
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -105,7 +106,7 @@ public class MilestoneStep extends AbstractStepImpl {
         public void load() {
             super.load();
             if (milestonesByOrdinalByJob == null) {
-                milestonesByOrdinalByJob = new TreeMap<String, Map<Integer, Milestone>>();
+                milestonesByOrdinalByJob = new ConcurrentSkipListMap<>();
             }
             LOGGER.log(Level.FINE, "load: {0}", milestonesByOrdinalByJob);
         }
