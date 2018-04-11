@@ -186,7 +186,9 @@ public class MilestoneStepExecution extends AbstractSynchronousStepExecution<Voi
         for (Milestone milestone : milestonesInJob.values()) {
             if (milestone.wentAway(r)) {
                 modified = true;
-                cancelOldersInSight(milestone, r);
+                // This is exactly what we do not want: why is the end of a job handled like a milestone?
+                // If a build passed all milestones we do not want it to be aborted.
+                //cancelOldersInSight(milestone, r);
             }
         }
         if (modified) {
